@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>My Html5 Music Player</title> 
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="MyPlayer.css">
+	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+	</head>
+<body>
+	<div class="container" id="player">
+		<div class="jumbotron">
+
+			<div id="cover" class="responsive">
+				<img src="media/img/cover.jpg" class="img-responsive" alt="cover"> 
+			</div>
+
+			<div class="btn-group" id="buttons">
+					<button type="button" class="btn btn-info" id="prev">
+						Prev <span class="glyphicon glyphicon-fast-backward"></span>
+					</button>
+					<button type="button" class="btn btn-info" id="play">
+						<span class="glyphicon glyphicon-play"></span> Play
+					</button>
+					<button type="button" class="btn btn-info" id="stop">
+						<span class="glyphicon glyphicon-stop"></span> Stop
+					</button>
+
+					<button type="button" class="btn btn-info" id="next">
+						<span class="glyphicon glyphicon-fast-forward"></span> Next
+					</button>
+			</div>
+
+			<div class="progress">
+				<div id="progress_bar" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+				</div>
+			</div>
+
+			<div class="row" id="track">
+				<div id="elapse-time" class="col-sm-1">0:00</div>
+				<div class="col-sm-9"></div>
+				<div id="totaltime" class="col-sm-1">4:00</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</html>
