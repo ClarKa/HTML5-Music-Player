@@ -1,13 +1,13 @@
 (function() {
 	$("#slidedown").click(function() {
 		$("#playlist").slideToggle("fast");
-		$("#slidedown").css("display","none");
+		$(this).css("display","none");
 		$("#slideup").css("display","block")
 	});
 	
 	$("#slideup").click(function() {
 		$("#playlist").slideToggle("fast");
-		$("#slideup").css("display","none");
+		$(this).css("display","none");
 		$("#slidedown").css("display","block")
 	});
 
@@ -20,16 +20,7 @@
 	document.getElementById("playlist").addEventListener(
 			"click", 
 			function(event) {
-			/*	if (document.getElementById("item-active") != null) {
-					document.getElementById("item-active").className="list-group-item";
-					document.getElementById("item-active").id="item";
-				}
-
-				event.target.className="list-group-item active";	
-				event.target.id="item-active";*/
-
 				curr_audioValue = parseInt(event.target.getAttribute("data-value"));
-
 				loadNewAudio(curr_audioValue);
 			});
 
@@ -79,6 +70,7 @@
 		pause2play();
 	});
 
+	//--------disable Prev/Next button while hit the top/bottom of playlist------------
 	$('audio').on('playing', function() {
 		if (curr_audioValue+1 == audioList.length) {
 			$("#next").addClass("disabled");
@@ -101,10 +93,18 @@
 	$('audio').on("timeupdate",function(){
 		var cur = curr_audio.currentTime;
 		var bar_width = [cur/curr_audio.duration*100 + '%'];
-		$(".current").html(formatTime(cur));
+		$("#current").html(formatTime(cur));
 		$("#progress_bar").width(bar_width);
 	});
 
+	$('.progress').click(function(event) {
+		var x = event.pageX;
+		var offset = $(this).offset();
+		if (curr_audio !== undefined) {
+			curr_audio.currentTime = (x-offset.left)/$(this).width()*curr_audio.duration;
+			console.log(["skip to " + curr_audio.currentTime]);
+		}
+	});
 
 	
 //--------------helper functions------------------------------------
@@ -119,8 +119,8 @@
 	}
 
 	function formatTime(seconds) {
-		var min = Math.round(seconds/60);
-		var sec = Math.round(seconds%60);
+		var min = Math.floor(seconds/60);
+		var sec = Math.floor(seconds%60);
 		var time = [min + " : " + sec];
 		return time;
 	}
@@ -135,7 +135,7 @@
 		play2pause();
 
 		var time = formatTime(curr_audio.duration);
-		$(".duration").html(time);
+		$("#duration").html(time);
 
 		console.log(["Now Playing " + curr_audioValue + " of " + audioList.length + " Song in the Playlist"]);
 
