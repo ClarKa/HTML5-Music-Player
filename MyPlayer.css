@@ -1,22 +1,32 @@
-#elapse-time {
-}
-
-#time-left {
-}
-
 .progress {
 	margin-bottom: 5px;
 }
 
 #player {
 	max-width: 500px;
-	max-height: 300px;
 }
 
 #cover {
 	margin-bottom: 5px;
+
 }
 
 #buttons {
 	margin-bottom: 5px;
+}
+
+#slideup {
+	display: none;
+}
+
+#slideup, #slidedown {
+	margin-top: 5px;
+}
+
+#playlist {
+	display: none;
+}
+
+#pause {
+	display: none;
 }

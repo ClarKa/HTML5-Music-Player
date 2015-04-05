@@ -23,6 +23,9 @@
 					<button type="button" class="btn btn-info" id="play">
 						<span class="glyphicon glyphicon-play"></span> Play
 					</button>
+					<button type="button" class="btn btn-info" id="pause">
+						<span class="glyphicon glyphicon-pause"></span> Pause
+					</button>
 					<button type="button" class="btn btn-info" id="stop">
 						<span class="glyphicon glyphicon-stop"></span> Stop
 					</button>
@@ -42,9 +45,23 @@
 				<div class="col-sm-9"></div>
 				<div id="totaltime" class="col-sm-1">4:00</div>
 			</div>
+
+			<button type="button" class="btn btn-default btn-sm" id="slideup">
+          		<span class="glyphicon glyphicon-chevron-up"></span> Hide Playlist
+        	</button>
+			<button type="button" class="btn btn-default btn-sm" id="slidedown">
+          		<span class="glyphicon glyphicon-chevron-down"></span> Show Playlist
+        	</button>
+			<div id="playlist">
+				<a href="#" class="list-group-item">Transformers2</a>
+				<audio id="Transformers2" src="media/audio/Transformers2.mp3" type="audio/mpeg"></audio>
+				<!-- <a href="#" class="list-group-item">second item</a> -->
+				<!-- <a href="#" class="list-group-item">third item</a> -->	
+			</div>
 		</div>
 	</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="MyPlayer.js"></script>
 </html>
