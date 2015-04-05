@@ -1,5 +1,9 @@
-.progress {
-	margin-bottom: 5px;
+#progress {
+	margin-bottom: 10px;
+	margin-top: 5px;
+	height:10px;
+	max-width: 325px;
+	background-color: LightGray;
 }
 
 #player {
@@ -8,22 +12,41 @@
 
 #cover {
 	margin-bottom: 5px;
-
+	position: relative;
+	top: -20px;
 }
 
 #buttons {
+	margin-top: 5px;
 	margin-bottom: 5px;
-}
-
-#slideup {
-	display: none;
+	position: relative;
+	top: -10px;
 }
 
 #slideup, #slidedown {
 	margin-top: 5px;
 }
 
-#playlist {
-	display: none;
+#volume {
+	margin-bottom: 10px;
+	margin-top: 5px;
+	position: relative;
+	left: 30%;
+	top: 6px;
+	height: 5px;
+	width: 85px;
+	background-color: LightGray;
+}
+
+#volume_icon{
+	position: relative;
+	left: 30%;
+}
+
+#slideup, #slidedown, #volume, #volume_icon {
+	display:inline-block;
+}
+
+.jumbotron {
 }
 

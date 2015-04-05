@@ -1,19 +1,20 @@
 (function() {
 	$("#slidedown").click(function() {
 		$("#playlist").slideToggle("fast");
-		$(this).css("display","none");
-		$("#slideup").css("display","block")
+		$(this).addClass("hidden");
+		$("#slideup").removeClass("hidden");
 	});
 	
 	$("#slideup").click(function() {
 		$("#playlist").slideToggle("fast");
-		$(this).css("display","none");
-		$("#slidedown").css("display","block")
+		$(this).addClass("hidden");
+		$("#slidedown").removeClass("hidden");
 	});
 
 	var curr_audio;
 	var curr_audioValue;
 	var audioList = document.getElementsByTagName("audio");
+	var vol = 1;
 	//console.log(audioList);
 
 
@@ -97,15 +98,32 @@
 		$("#progress_bar").width(bar_width);
 	});
 
-	$('.progress').click(function(event) {
+	$('#progress').click(function(event) {
 		var x = event.pageX;
 		var offset = $(this).offset();
 		if (curr_audio !== undefined) {
 			curr_audio.currentTime = (x-offset.left)/$(this).width()*curr_audio.duration;
-			console.log(["skip to " + curr_audio.currentTime]);
+			console.log("skip to " + curr_audio.currentTime);
 		}
 	});
 
+//---------------volume control-------------------------------
+	$('#volume').click(function(event) {
+		var x = event.pageX;
+		var offset = $(this).offset();
+		vol = (x-offset.left)/$(this).width();
+		var bar_width = [vol/1 * 100 + '%']
+		$('#volume_bar').width(bar_width);
+		if (curr_audio !== undefined) {
+			curr_audio.volume = vol;
+			console.log('Volume = ' + curr_audio.volume);
+		}
+	});
+
+	$('audio').on('playing', function() {
+		curr_audio.volume = vol;
+		console.log('Volume = ' + curr_audio.volume);
+	});
 	
 //--------------helper functions------------------------------------
 	function play2pause() {
@@ -114,6 +132,7 @@
 	}
 
 	function pause2play() {
+
 		$("#pause").addClass("hidden");
 		$("#play").removeClass("hidden");
 	}
@@ -137,7 +156,7 @@
 		var time = formatTime(curr_audio.duration);
 		$("#duration").html(time);
 
-		console.log(["Now Playing " + curr_audioValue + " of " + audioList.length + " Song in the Playlist"]);
+		console.log("Now Playing " + curr_audioValue + " of " + audioList.length + " Song in the Playlist");
 
 		//--------------switch playlist entries between active and non-active------------------------------
 		if ($("#item-active") != null) {

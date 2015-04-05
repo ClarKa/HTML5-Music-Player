@@ -17,41 +17,48 @@
 			</div>
 
 			<div class="btn-group" id="buttons">
-					<button type="button" class="btn btn-info" id="prev">
+					<button type="button" class="btn btn-info btn-sm" id="prev">
 						Prev <span class="glyphicon glyphicon-fast-backward"></span>
 					</button>
-					<button type="button" class="btn btn-info" id="play">
+					<button type="button" class="btn btn-info btn-sm" id="play">
 						<span class="glyphicon glyphicon-play"></span> Play
 					</button>
-					<button type="button" class="btn btn-info hidden" id="pause">
+					<button type="button" class="btn btn-info btn-sm hidden" id="pause">
 						<span class="glyphicon glyphicon-pause"></span> Pause
 					</button>
-					<button type="button" class="btn btn-info" id="stop">
+					<button type="button" class="btn btn-info btn-sm" id="stop">
 						<span class="glyphicon glyphicon-stop"></span> Stop
 					</button>
 
-					<button type="button" class="btn btn-info" id="next">
+					<button type="button" class="btn btn-info btn-sm" id="next">
 						<span class="glyphicon glyphicon-fast-forward"></span> Next
 					</button>
 			</div>
 
-			<div class="progress">
+			<div class="progress" id="progress">
 				<div id="progress_bar" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:70%">
 				</div>
 			</div>
 
 			<div class="row" id="track">
-				<div class="col-sm-4">Current: <span id="current"></span></div>
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4">Duration: <span id="duration"></span></div>
+				<div class="col-sm-3"><span id="current"></span></div>
+				<div class="col-sm-6"></div>
+				<div class="col-sm-3"><span id="duration"></span></div>
 			</div>
 
 			<button type="button" class="btn btn-default btn-sm" id="slideup">
           		<span class="glyphicon glyphicon-chevron-up"></span> Hide Playlist
         	</button>
-			<button type="button" class="btn btn-default btn-sm" id="slidedown">
+			<button type="button" class="btn btn-default btn-sm hidden" id="slidedown">
           		<span class="glyphicon glyphicon-chevron-down"></span> Show Playlist
         	</button>
+
+			<div id="volume_icon" class="glyphicon glyphicon-volume-up"></div>
+			<div class="progress" id="volume">
+				<div id="volume_bar" class="progress-bar progress-bar progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+				</div>
+			</div>
+
 			<div id="playlist" class="list-group">
 				<a href="#" class="list-group-item" data-value=0>Transformers2</a>
 				<audio id="Transformers2" src="media/audio/Transformers2.mp3" type="audio/mpeg"></audio>
@@ -63,8 +70,8 @@
 		</div>
 	</div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="js/MyPlayer.js"></script>
 </html>
