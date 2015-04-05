@@ -1,0 +1,29 @@
+.progress {
+	margin-bottom: 5px;
+}
+
+#player {
+	max-width: 500px;
+}
+
+#cover {
+	margin-bottom: 5px;
+
+}
+
+#buttons {
+	margin-bottom: 5px;
+}
+
+#slideup {
+	display: none;
+}
+
+#slideup, #slidedown {
+	margin-top: 5px;
+}
+
+#playlist {
+	display: none;
+}
+
