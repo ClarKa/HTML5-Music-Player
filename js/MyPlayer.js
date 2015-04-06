@@ -135,16 +135,17 @@
 		this.className = "glyphicon glyphicon-volume-off";
 	});
 
-	//-----------------volume listener--------------------------
-	function addVolumeListener() {
-		curr_audio.onplaying = function() {
-			curr_audio.volume = vol;
-			console.log('Volume = ' + curr_audio.volume);
-		};
-	}
+/*	//-----------------volume listener--------------------------
+ * 	function addVolumeListener() {
+ *		curr_audio.onplaying = function() {
+ *			curr_audio.volume = vol;
+ *			console.log('Volume = ' + curr_audio.volume);
+ *		};
+ *	}
+ */
 
-//--------------drag to add in playlist-----------------------------
-	document.getElementById('playlist').addEventListener(
+//--------------drag&drop to add in playlist-----------------------------
+	document.getElementById('player').addEventListener(
 			'drop',
 			function(event) {
 				event.preventDefault();
@@ -163,15 +164,17 @@
 				var newNode2 = $('<audio></audio>');
 				$(newNode2).attr('src',url);
 				$('#playlist').append(newNode2);
+
+				$('#next').removeClass('disabled');
 			});
 
-	document.getElementById('playlist').addEventListener(
+	document.getElementById('player').addEventListener(
 			'dragover', 
 			function(event) {
 				event.preventDefault();
 			});
 
-	document.getElementById('playlist').addEventListener(
+	document.getElementById('player').addEventListener(
 			'dragstart',
 			function(event) {
 				event.preventDefault();
@@ -214,13 +217,15 @@
 		}
 
 		curr_audio = audioList[curr_audioValue];
-		curr_audio.play();
 		play2pause();
 
 		addTimeUpdate();
 		addEndListener();
-		addVolumeListener();
 		addBtnListener();
+
+		curr_audio.volume = vol;
+		console.log('Volume = ' + curr_audio.volume);
+		curr_audio.play();
 
 		var time = formatTime(curr_audio.duration);
 		$("#duration").html(time);
