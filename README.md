@@ -9,4 +9,5 @@ currently, this supports the following features:
     - Progress bar
     - Click progree bar to skip within audio track
     - Hide/show playlist
+    - loop playlist
     
