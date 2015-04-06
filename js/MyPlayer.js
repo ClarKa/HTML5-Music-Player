@@ -69,6 +69,8 @@
 	
 	$('audio').on('ended',function(){
 		pause2play();
+		//---------continue playing------------
+		nextToPlay();
 	});
 
 	//--------disable Prev/Next button while hit the top/bottom of playlist------------
@@ -120,11 +122,22 @@
 		}
 	});
 
+	$('#volume_icon').click(function() {
+		vol = 0;
+		if (curr_audio !== undefined) {
+			curr_audio.volume = vol;
+		}
+		console.log('Muted');
+		$('#volume_bar').width("0%");
+
+		this.className = "glyphicon glyphicon-volume-off";
+	});
+
 	$('audio').on('playing', function() {
 		curr_audio.volume = vol;
 		console.log('Volume = ' + curr_audio.volume);
 	});
-	
+
 //--------------helper functions------------------------------------
 	function play2pause() {
 		$("#pause").removeClass("hidden");
@@ -142,6 +155,11 @@
 		var sec = Math.floor(seconds%60);
 		var time = [min + " : " + sec];
 		return time;
+	}
+
+	function nextToPlay() {
+		curr_audioValue = (curr_audioValue+1) % 3;
+		loadNewAudio(curr_audioValue); 
 	}
 
 	function loadNewAudio(curr_audioValue) {
@@ -168,5 +186,4 @@
 		$(tmp).addClass("active");
 		$(tmp).attr("id","item-active");
 	}
-
 }) ();
