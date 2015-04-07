@@ -1,4 +1,17 @@
 (function() {
+
+	$(document).ready(function() {
+		alert("Drag and drop some music into this page to start!");
+	})
+
+	var curr_audio;
+	var curr_audioValue;
+	var audioList = document.getElementsByTagName("audio");
+	var vol = 1;
+	var player = document.getElementById('player');
+	var dropbox = document.getElementsByTagName("body")[0];
+	//console.log(audioList);
+
 	$("#slidedown").click(function() {
 		$("#playlist").slideToggle("fast");
 		$(this).addClass("hidden");
@@ -11,18 +24,11 @@
 		$("#slidedown").removeClass("hidden");
 	});
 
-	var curr_audio;
-	var curr_audioValue;
-	var audioList = document.getElementsByTagName("audio");
-	var vol = 1;
-	//console.log(audioList);
-
-
 	document.getElementById("playlist").addEventListener(
 			"click", 
 			function(event) {
 				curr_audioValue = parseInt(event.target.getAttribute("data-value"));
-				loadNewAudio(curr_audioValue);
+				loadNewAudio();
 			});
 
 //-------------control buttons---------------------------------------------
@@ -30,6 +36,10 @@
 			"click",
 			function() {
 				if(curr_audio === undefined) {
+					if(audioList.length == 0) {
+						alert('Please drag some audio files into the page to add it into the playlist!');
+						return
+					}
 					alert("Please select an audio from the playlist to play!");
 					return;
 				}
@@ -59,12 +69,12 @@
 	
 	$("#next").click(function() {
 		curr_audioValue++;
-		loadNewAudio(curr_audioValue);
+		loadNewAudio();
 	});
 			
 	$("#prev").click(function() {
 		curr_audioValue--;
-		loadNewAudio(curr_audioValue);
+		loadNewAudio();
 	});
 
 	//--------disable Prev/Next button while hit the top/bottom of playlist------------
@@ -145,38 +155,48 @@
  */
 
 //--------------drag&drop to add in playlist-----------------------------
-	document.getElementById('player').addEventListener(
+	dropbox.addEventListener(
 			'drop',
 			function(event) {
+				event.stopPropagation();
 				event.preventDefault();
 
 				//-------create new playlist entry----------------
 				var input = event.dataTransfer.files;
-				var name = input[0].name;
-				var newNode = $('<a></a>').text(name);
-				$(newNode).attr('href','#');
-				$(newNode).addClass('list-group-item'); 
-				$(newNode).attr('data-value',audioList.length);
-				$('#playlist').append(newNode);
+				var name;
+				var newNode;
+				var url;
+				var newNode2;
+				for(i=0;i<input.length;i++) {
+					name = input[i].name;
+					newNode = $('<a></a>').text(name);
+					$(newNode).attr('href','#');
+					$(newNode).addClass('list-group-item'); 
+					$(newNode).attr('data-value',audioList.length);
+					$('#playlist').append(newNode);
 
-				//-------create new audio element-----------------
-				var url = URL.createObjectURL(input[0]);
-				var newNode2 = $('<audio></audio>');
-				$(newNode2).attr('src',url);
-				$('#playlist').append(newNode2);
+					//-------create new audio element-----------------
+					url = window.URL.createObjectURL(input[i]);
+					newNode2 = $('<audio></audio>');
+					$(newNode2).attr('src',url);
+					$('#playlist').append(newNode2);
 
-				$('#next').removeClass('disabled');
+					$('#next').removeClass('disabled');
+				}
+			
 			});
 
-	document.getElementById('player').addEventListener(
+	dropbox.addEventListener(
 			'dragover', 
 			function(event) {
+				event.stopPropagation();
 				event.preventDefault();
 			});
 
-	document.getElementById('player').addEventListener(
-			'dragstart',
+	dropbox.addEventListener(
+			'dragenter',
 			function(event) {
+				event.stopPropagation();
 				event.preventDefault();
 			});
 
@@ -208,15 +228,16 @@
 
 	function nextToPlay() {
 		curr_audioValue = (curr_audioValue+1) % audioList.length;
-		loadNewAudio(curr_audioValue); 
+		loadNewAudio(); 
 	}
 
-	function loadNewAudio(curr_audioValue) {
-		if (curr_audio !== undefined) {
+	function loadNewAudio() {
+		var new_audio = audioList[curr_audioValue];
+		if (curr_audio !== undefined && new_audio !== curr_audio) {
 			curr_audio.load();
 		}
 
-		curr_audio = audioList[curr_audioValue];
+		curr_audio = new_audio;
 		play2pause();
 
 		addTimeUpdate();
@@ -227,8 +248,11 @@
 		console.log('Volume = ' + curr_audio.volume);
 		curr_audio.play();
 
+		console.log(curr_audio);
+		console.log(curr_audio.duration);
+
 		var time = formatTime(curr_audio.duration);
-		$("#duration").html(time);
+		$("#duration").html(time)
 
 		console.log("Now Playing " + curr_audioValue + " of " + audioList.length + " Song in the Playlist");
 
@@ -242,4 +266,5 @@
 		$(tmp).addClass("active");
 		$(tmp).attr("id","item-active");
 	}
+
 }) ();
