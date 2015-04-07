@@ -12,8 +12,8 @@ Currently, this supports the following features:
     - Click progree bar to skip within audio track
     - Hide/show playlist
     - loop playlist
-    - drag and drop local audio files into the player area to add it to the bottom of the playlist
-        - do not drag into other area of the page, just into player box
+    - drag and drop local audio files into the page to add it to the bottom of the playlist
+        - can add multiple files by one drag&drop  
     
 This player was built and tested using Chrome version 41(64-bit)
 
